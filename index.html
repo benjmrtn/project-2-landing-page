@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+<html lang="en" style="color-scheme: light;">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="color-scheme" content="light" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4Core Venture Labs · Project 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { color-scheme: light; }
+    html, body { background-color: #f5f4f0 !important; color: #111110 !important; }
+    :root {
+      --bg: #f5f4f0;
+      --white: #ffffff;
+      --ink: #111110;
+      --ink-2: #3a3a38;
+      --muted: #8a8a85;
+      --border: #e2e1dc;
+      --accent: #1a3fff;
+      --accent-light: rgba(26,63,255,0.07);
+      --green: #1d7a4f;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+      --font-sans: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+```
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px; height: 60px;
+  background: rgba(245,244,240,0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+@media(max-width:600px){ nav { padding: 0 24px; } }
+.nav-logo {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.04em; color: var(--ink); text-decoration: none;
+}
+.nav-cta {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+  padding: 7px 18px; border: 1px solid var(--ink); border-radius: 2px;
+  transition: background .18s, color .18s;
+}
+.nav-cta:hover { background: var(--ink); color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 140px 80px 100px;
+  border-bottom: 1px solid var(--border);
+}
+@media(max-width:768px){ .hero { padding: 120px 32px 72px; } }
+.hero-inner { max-width: 700px; }
+.hero-name {
+  font-family: var(--font-serif);
+  font-size: clamp(38px, 5.5vw, 68px);
+  line-height: 1.06; letter-spacing: -0.015em;
+  color: var(--ink); margin-bottom: 20px;
+}
+.hero-tagline {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300; color: var(--ink-2);
+  line-height: 1.5; margin-bottom: 32px;
+}
+.hero-tagline em {
+  font-style: italic; color: var(--accent);
+  font-family: var(--font-serif); font-size: 1.08em;
+}
+.hero-rule {
+  width: 36px; height: 1px; background: var(--border); margin-bottom: 28px;
+}
+.hero-intro {
+  font-size: 15px; font-weight: 300; color: var(--muted);
+  max-width: 520px; line-height: 1.85; margin-bottom: 48px;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn-primary {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  letter-spacing: 0.04em; color: var(--white); background: var(--accent);
+  padding: 13px 28px; border: none; cursor: pointer; border-radius: 3px;
+  text-decoration: none; transition: opacity .18s, transform .18s; display: inline-block;
+}
+.btn-primary:hover { opacity: .85; transform: translateY(-1px); }
+.btn-ghost {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 400;
+  letter-spacing: 0.04em; color: var(--ink-2); background: transparent;
+  padding: 13px 28px; border: 1px solid var(--border); cursor: pointer;
+  border-radius: 3px; text-decoration: none; transition: border-color .18s, color .18s;
+}
+.btn-ghost:hover { border-color: var(--ink-2); color: var(--ink); }
+
+/* ── SECTIONS ── */
+section { padding: 100px 48px; }
+@media(max-width:768px){ section { padding: 72px 32px; } }
+.section-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing:.14em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 18px;
+}
+.section-title {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.8vw, 48px);
+  line-height: 1.12; color: var(--ink); margin-bottom: 20px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+
+/* ── PROBLEMS ── */
+.problems { background: var(--white); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.problems-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+@media(max-width:768px){ .problems-inner { grid-template-columns: 1fr; gap: 48px; } }
+.problems-text p { font-size: 16px; font-weight: 300; color: var(--ink-2); line-height: 1.8; margin-bottom: 14px; }
+.pain-list { list-style: none; }
+.pain-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
+  opacity: 0; transform: translateY(14px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.pain-item.visible { opacity: 1; transform: translateY(0); }
+.pain-num { font-family: var(--font-mono); font-size: 11px; color: var(--muted); min-width: 22px; padding-top: 2px; }
+.pain-content strong { display: block; font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.pain-content span { font-size: 13px; color: var(--muted); font-weight: 300; }
+
+/* ── SOLUTION ── */
+.solution { background: var(--bg); border-bottom: 1px solid var(--border); }
+.solution-inner { max-width: 1080px; margin: 0 auto; }
+.solution-header { max-width: 560px; margin-bottom: 56px; }
+.solution-header p { font-size: 15px; font-weight: 300; color: var(--ink-2); line-height: 1.8; }
+.pipeline { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+@media(max-width:768px){ .pipeline { grid-template-columns: 1fr; } }
+.pipeline-step {
+  background: var(--white); padding: 30px 26px;
+  border: 1px solid var(--border); position: relative; overflow: hidden;
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.pipeline-step.visible { opacity: 1; transform: translateY(0); }
+.pipeline-step::before {
+  content:''; position: absolute; top:0; left:0; right:0; height:2px;
+  background: var(--accent); transform: scaleX(0); transform-origin: left;
+  transition: transform .35s ease;
+}
+.pipeline-step:hover::before { transform: scaleX(1); }
+.step-index { font-family: var(--font-mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase; color: var(--muted); margin-bottom:14px; }
+.step-title { font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 8px; }
+.step-desc { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.65; }
+
+/* ── WHAT CHANGES ── */
+.compare { background: var(--white); border-bottom: 1px solid var(--border); }
+.compare-inner { max-width: 860px; margin: 0 auto; }
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 44px; }
+@media(max-width:620px){ .compare-grid { grid-template-columns: 1fr; } }
+.compare-col { padding: 28px; border: 1px solid var(--border); border-radius: 3px; }
+.compare-col.ours { border-color: var(--accent); background: var(--accent-light); }
+.compare-col-title { font-family: var(--font-mono); font-size: 11px; letter-spacing:.12em; text-transform:uppercase; color: var(--muted); margin-bottom: 18px; }
+.compare-col.ours .compare-col-title { color: var(--accent); }
+.compare-row { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 11px; }
+.compare-row .icon { font-size: 13px; min-width: 18px; padding-top: 1px; color: var(--muted); }
+.compare-col.ours .compare-row .icon { color: var(--accent); }
+.compare-row span { font-size: 14px; font-weight: 300; color: var(--ink-2); line-height: 1.5; }
+.compare-col.ours .compare-row span { color: var(--ink); font-weight: 400; }
+
+/* ── FORM ── */
+.form-section { background: var(--bg); border-bottom: 1px solid var(--border); }
+.form-inner { max-width: 660px; margin: 0 auto; }
+.form-intro { margin-bottom: 52px; }
+.form-intro p { font-size: 16px; font-weight: 300; color: var(--ink-2); line-height: 1.75; }
+
+.progress-bar-wrap { display: flex; align-items: center; gap: 8px; margin-bottom: 48px; }
+.progress-step {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing:.06em; color: var(--muted);
+  white-space: nowrap;
+}
+.progress-step.active { color: var(--accent); }
+.progress-step.done { color: var(--green); }
+.progress-dot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid currentColor; flex-shrink: 0; }
+.progress-step.active .progress-dot { background: var(--accent); border-color: var(--accent); }
+.progress-step.done .progress-dot { background: var(--green); border-color: var(--green); }
+.progress-line { flex: 1; height: 1px; background: var(--border); min-width: 16px; }
+.progress-line.done { background: var(--green); }
+
+.form-step { display: none; }
+.form-step.active { display: block; animation: fin .35s ease; }
+@keyframes fin { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+
+.step-question { font-family: var(--font-serif); font-size: 26px; line-height: 1.22; color: var(--ink); margin-bottom: 8px; }
+.step-hint { font-size: 13px; font-weight: 300; color: var(--muted); margin-bottom: 30px; }
+
+.options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 30px; }
+@media(max-width:540px){ .options-grid { grid-template-columns: 1fr; } }
+.option-card {
+  padding: 16px 18px; border: 1px solid var(--border);
+  background: var(--white); cursor: pointer; border-radius: 3px;
+  transition: border-color .16s, background .16s;
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.option-card:hover { border-color: rgba(26,63,255,.4); }
+.option-card.selected { border-color: var(--accent); background: var(--accent-light); }
+.option-card input { display: none; }
+.option-check {
+  width: 16px; height: 16px; border: 1.5px solid var(--border);
+  border-radius: 2px; flex-shrink: 0; margin-top: 2px;
+  transition: border-color .16s, background .16s; position: relative;
+}
+.option-card.selected .option-check { border-color: var(--accent); background: var(--accent); }
+.option-card.selected .option-check::after {
+  content:''; position: absolute; top:2px; left:5px;
+  width:4px; height:7px; border:1.5px solid white;
+  border-top:none; border-left:none; transform:rotate(45deg);
+}
+.option-text strong { display: block; font-size: 14px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+.option-text small { font-size: 12px; color: var(--muted); font-weight: 300; }
+
+.textarea-field {
+  width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+  background: var(--white); border-radius: 3px;
+  font-family: var(--font-sans); font-size: 14px; font-weight: 300;
+  color: var(--ink); line-height: 1.6; resize: vertical; min-height: 90px;
+  margin-bottom: 22px; outline: none; transition: border-color .16s;
+}
+.textarea-field:focus { border-color: var(--accent); }
+.textarea-field::placeholder { color: var(--muted); }
+
+.email-field-wrap { margin-bottom: 20px; }
+.field-label {
+  font-family: var(--font-mono); font-size: 11px; letter-spacing:.1em;
+  text-transform: uppercase; color: var(--muted); display: block; margin-bottom: 8px;
+}
+.input-field {
+  width: 100%; padding: 13px 16px; border: 1px solid var(--border);
+  background: var(--white); border-radius: 3px;
+  font-family: var(--font-sans); font-size: 15px; font-weight: 300;
+  color: var(--ink); outline: none; transition: border-color .16s;
+}
+.input-field:focus { border-color: var(--accent); }
+.input-field::placeholder { color: var(--muted); }
+.input-field.error { border-color: #d03040; }
+
+.form-nav { display: flex; gap: 12px; align-items: center; margin-top: 4px; }
+.btn-next {
+  font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+  letter-spacing: .05em; color: var(--white); background: var(--ink);
+  padding: 12px 28px; border: none; cursor: pointer; border-radius: 3px;
+  transition: background .16s, transform .16s;
+}
+.btn-next:hover { background: var(--accent); transform: translateY(-1px); }
+.btn-next.submit { background: var(--accent); }
+.btn-next.submit:hover { background: #0e2ed4; }
+.btn-back {
+  font-family: var(--font-mono); font-size: 13px; color: var(--muted);
+  background: none; border: none; cursor: pointer; padding: 12px 0;
+  transition: color .16s;
+}
+.btn-back:hover { color: var(--ink); }
+
+/* ── THANK YOU ── */
+#form-thankyou { display: none; text-align: center; padding: 56px 0; animation: fin .4s ease; }
+.ty-icon {
+  width: 54px; height: 54px; background: var(--accent-light);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px; font-size: 20px; color: var(--accent);
+}
+.ty-title { font-family: var(--font-serif); font-size: 34px; color: var(--ink); margin-bottom: 10px; }
+.ty-sub { font-size: 15px; font-weight: 300; color: var(--muted); max-width: 400px; margin: 0 auto; line-height: 1.7; }
+.ty-result {
+  margin: 36px auto 0; padding: 26px 30px;
+  background: var(--white); border: 1px solid var(--border); border-radius: 4px;
+  text-align: left; max-width: 480px;
+}
+.ty-result-label { font-family: var(--font-mono); font-size: 10px; letter-spacing:.12em; text-transform:uppercase; color: var(--muted); margin-bottom: 10px; }
+.ty-result-insight { font-size: 15px; font-weight: 400; color: var(--ink); line-height: 1.65; }
+.ty-result-insight strong { color: var(--accent); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 36px 48px; border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+}
+.footer-logo { font-family: var(--font-mono); font-size: 13px; font-weight: 500; color: var(--ink); }
+.footer-note { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing:.05em; }
+
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+```
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <a class="nav-logo" href="#">Project 2</a>
+  <a class="nav-cta" href="#form-section">Request Early Access</a>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-name">4Core Venture Labs<br/>Project 2</h1>
+    <p class="hero-tagline"><em>Regulatory structuring</em> for RWA issuers. Without a lawyer.</p>
+    <div class="hero-rule"></div>
+    <p class="hero-intro">
+      Describe your asset and your target markets. The engine generates a complete jurisdiction-specific structuring report, legal entity, token standard, required licenses, documentation checklist, and regulatory risk flags, in minutes, not weeks.
+    </p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#form-section">Get my structuring report →</a>
+      <a class="btn-ghost" href="#solution">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO -->
+
+<section class="problems" id="problems">
+  <div class="problems-inner">
+    <div class="problems-text reveal">
+      <p class="section-label">What we do</p>
+      <h2 class="section-title">The bottleneck to every<br/>RWA issuance is <em>legal structuring.</em></h2>
+      <p>Every founder launching a tokenized asset faces the same first question: how do we structure this to be compliant in our target markets?</p>
+      <p>Law firms charge hundreds per hour and take weeks. Generic compliance tools are built for post-issuance monitoring, not pre-issuance structuring. There is no affordable, fast alternative.</p>
+    </div>
+    <ul class="pain-list">
+      <li class="pain-item">
+        <span class="pain-num">01</span>
+        <div class="pain-content">
+          <strong>Legal fees are prohibitive at ideation stage</strong>
+          <span>A typical structuring engagement costs tens of thousands before you know if the project is viable.</span>
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">02</span>
+        <div class="pain-content">
+          <strong>No unified global framework exists</strong>
+          <span>The same token can be a security in the US, a transferable security in the EU, and a capital markets product in Singapore, each with entirely different requirements.</span>
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">03</span>
+        <div class="pain-content">
+          <strong>Cross-border structuring has no single playbook</strong>
+          <span>A tokenized fund seeking investors across three jurisdictions requires knowledge that no generalist lawyer holds end-to-end.</span>
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">04</span>
+        <div class="pain-content">
+          <strong>Token standard choice carries compliance risk</strong>
+          <span>Choosing the wrong standard for the wrong jurisdiction creates legal exposure that surfaces only at issuance, too late to fix cheaply.</span>
+        </div>
+      </li>
+      <li class="pain-item">
+        <span class="pain-num">05</span>
+        <div class="pain-content">
+          <strong>Regulations change faster than legal advice</strong>
+          <span>MiCA, GENIUS Act, MAS guidelines, the landscape shifts constantly. Static legal memos go stale within months.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+
+<section class="solution" id="solution">
+  <div class="solution-inner">
+    <div class="solution-header reveal">
+      <p class="section-label">The engine</p>
+      <h2 class="section-title">Five inputs.<br/><em>One complete report.</em></h2>
+      <p>Enter your asset type, target jurisdictions, investor profile, token standard preference, and current project status. The engine processes everything and returns a structured, actionable report you can share with co-founders, investors, and counsel.</p>
+    </div>
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="step-index">Output 01</div>
+        <div class="step-title">Legal Entity Recommendation</div>
+        <div class="step-desc">SPV, RAIF, Cayman trust, Singapore VCC, the right structure for your asset and markets, with rationale.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-index">Output 02</div>
+        <div class="step-title">Token Classification Analysis</div>
+        <div class="step-desc">Security, e-money token, asset-referenced token, or utility token, per jurisdiction, with the exact regulatory basis.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-index">Output 03</div>
+        <div class="step-title">Licenses and Registrations</div>
+        <div class="step-desc">Which licenses you need, which authority to contact, and approximate timeline, per market, not as a generic list.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-index">Output 04</div>
+        <div class="step-title">Documentation Checklist</div>
+        <div class="step-desc">Offering memorandum, subscription agreement, KIID, AML/KYC policy, what you need and in what order.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-index">Output 05</div>
+        <div class="step-title">Smart Contract Requirements</div>
+        <div class="step-desc">Which transfer restrictions and investor whitelist logic must be encoded, matched to your chosen token standard.</div>
+      </div>
+      <div class="pipeline-step">
+        <div class="step-index">Output 06</div>
+        <div class="step-title">Risk Flags and Next Steps</div>
+        <div class="step-desc">Red zones, mitigation options, and an ordered action list distinguishing what requires a lawyer from what does not.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT CHANGES -->
+
+<section class="compare">
+  <div class="compare-inner reveal">
+    <p class="section-label">What changes</p>
+    <h2 class="section-title">The gap<br/><em>nobody has filled.</em></h2>
+    <div class="compare-grid">
+      <div class="compare-col">
+        <div class="compare-col-title">The current reality</div>
+        <div class="compare-row"><span class="icon">–</span><span>Law firms at hundreds per hour, weeks of turnaround</span></div>
+        <div class="compare-row"><span class="icon">–</span><span>Generic compliance tools built for post-issuance monitoring</span></div>
+        <div class="compare-row"><span class="icon">–</span><span>No self-serve option for early-stage founders</span></div>
+        <div class="compare-row"><span class="icon">–</span><span>Static advice that goes stale as regulations evolve</span></div>
+        <div class="compare-row"><span class="icon">–</span><span>Enterprise infrastructure inaccessible to small teams</span></div>
+        <div class="compare-row"><span class="icon">–</span><span>Structuring that requires you to already know the answer</span></div>
+      </div>
+      <div class="compare-col ours">
+        <div class="compare-col-title">Project 2</div>
+        <div class="compare-row"><span class="icon">✓</span><span>Self-serve, AI-generated report in minutes</span></div>
+        <div class="compare-row"><span class="icon">✓</span><span>Pre-issuance structuring, not post-issuance monitoring</span></div>
+        <div class="compare-row"><span class="icon">✓</span><span>Built for founders at ideation stage, no legal team required</span></div>
+        <div class="compare-row"><span class="icon">✓</span><span>Jurisdiction modules updated as regulations change</span></div>
+        <div class="compare-row"><span class="icon">✓</span><span>Accessible at a fraction of the cost of legal counsel</span></div>
+        <div class="compare-row"><span class="icon">✓</span><span>Tells you what structure to use and exactly why</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORM -->
+
+<section class="form-section" id="form-section">
+  <div class="form-inner">
+    <div class="form-intro reveal">
+      <p class="section-label">Early Access</p>
+      <h2 class="section-title">Tell us about<br/><em>your project.</em></h2>
+      <p>Four quick questions. We'll generate a preview of the structuring guidance relevant to your situation and add you to our early access list.</p>
+    </div>
+
+    <div class="progress-bar-wrap" id="progress-bar">
+      <div class="progress-step active" id="ps-1"><span class="progress-dot"></span>Asset</div>
+      <div class="progress-line" id="pl-1"></div>
+      <div class="progress-step" id="ps-2"><span class="progress-dot"></span>Markets</div>
+      <div class="progress-line" id="pl-2"></div>
+      <div class="progress-step" id="ps-3"><span class="progress-dot"></span>Status</div>
+      <div class="progress-line" id="pl-3"></div>
+      <div class="progress-step" id="ps-4"><span class="progress-dot"></span>Access</div>
+    </div>
+
+    <!-- STEP 1: ASSET TYPE -->
+    <div class="form-step active" id="step-1">
+      <h3 class="step-question">What type of asset are you tokenizing?</h3>
+      <p class="step-hint">This determines the regulatory classification logic we apply.</p>
+      <div class="options-grid" id="asset-options">
+        <div class="option-card" data-value="realestate">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Real Estate</strong><small>Residential, commercial, or infrastructure</small></span>
+        </div>
+        <div class="option-card" data-value="fund">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Tokenized Fund</strong><small>Private credit, VC, hedge, or PE fund</small></span>
+        </div>
+        <div class="option-card" data-value="stablecoin">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Stablecoin</strong><small>Fiat-backed, algo, or yield-bearing</small></span>
+        </div>
+        <div class="option-card" data-value="other">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Other RWA</strong><small>Carbon credits, private credit, infrastructure</small></span>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-next" onclick="window.nextStep(1)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: JURISDICTIONS -->
+    <div class="form-step" id="step-2">
+      <h3 class="step-question">Which jurisdictions do you need to cover?</h3>
+      <p class="step-hint">Select all markets where you plan to issue or sell to investors.</p>
+      <div class="options-grid" id="juris-options" style="grid-template-columns:1fr 1fr;">
+        <div class="option-card" data-value="eu">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>European Union</strong><small>MiCA + MiFID II</small></span>
+        </div>
+        <div class="option-card" data-value="uae">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>UAE</strong><small>ADGM / DIFC framework</small></span>
+        </div>
+        <div class="option-card" data-value="sg">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Singapore</strong><small>MAS licensing</small></span>
+        </div>
+        <div class="option-card" data-value="us">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>United States</strong><small>SEC / GENIUS Act</small></span>
+        </div>
+        <div class="option-card" data-value="uk">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>United Kingdom</strong><small>FCA regime</small></span>
+        </div>
+        <div class="option-card" data-value="ch">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Switzerland</strong><small>FINMA / DLT Act</small></span>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="window.prevStep(2)">← Back</button>
+        <button class="btn-next" onclick="window.nextStep(2)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: PROJECT STATUS -->
+    <div class="form-step" id="step-3">
+      <h3 class="step-question">Where is your project right now?</h3>
+      <p class="step-hint">This helps us calibrate the depth and urgency of the structuring guidance.</p>
+      <div class="options-grid" id="status-options" style="grid-template-columns:1fr;">
+        <div class="option-card" data-value="idea">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Ideation stage</strong><small>No legal entity yet, exploring whether the project is viable</small></span>
+        </div>
+        <div class="option-card" data-value="entity">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Legal entity exists</strong><small>Company formed, working on structuring the token issuance</small></span>
+        </div>
+        <div class="option-card" data-value="term">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Term sheet or raise underway</strong><small>Actively fundraising, need structuring clarity urgently</small></span>
+        </div>
+        <div class="option-card" data-value="platform">
+          <span class="option-check"></span>
+          <span class="option-text"><strong>Platform or advisory firm</strong><small>Serving multiple issuers, looking for a scalable structuring tool</small></span>
+        </div>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="window.prevStep(3)">← Back</button>
+        <button class="btn-next" onclick="window.nextStep(3)">Continue →</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: EMAIL -->
+    <div class="form-step" id="step-4">
+      <h3 class="step-question">Where should we send your structuring preview?</h3>
+      <p class="step-hint">We'll map the key regulatory requirements to your specific situation and notify you when early access opens.</p>
+      <div class="email-field-wrap">
+        <label class="field-label" for="name-input">First name</label>
+        <input class="input-field" type="text" id="name-input" placeholder="Your first name" autocomplete="given-name"/>
+      </div>
+      <div class="email-field-wrap">
+        <label class="field-label" for="email-input">Professional email</label>
+        <input class="input-field" type="email" id="email-input" placeholder="you@company.com" autocomplete="email"/>
+      </div>
+      <div class="form-nav">
+        <button class="btn-back" onclick="window.prevStep(4)">← Back</button>
+        <button class="btn-next submit" onclick="window.submitForm()">Get my preview →</button>
+      </div>
+    </div>
+
+    <!-- THANK YOU -->
+    <div id="form-thankyou">
+      <div class="ty-icon">✦</div>
+      <h3 class="ty-title">You're on the list.</h3>
+      <p class="ty-sub" id="ty-sub-text">We'll send your structuring preview within 24 hours.</p>
+      <div class="ty-result">
+        <div class="ty-result-label">Your key structuring insight</div>
+        <div class="ty-result-insight" id="ty-insight-text"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">Project 2</div>
+  <div class="footer-note">4Core Venture Labs · 2026 · Early Access</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ========================================
+   1. INITIALISER L'ÉTAT DU FORMULAIRE
+   ======================================== */
+window.fd = {
+  asset: '',
+  jurisdictions: [],
+  status: '',
+  email: '',
+  name: ''
+};
+
+window.supabaseClient = null;
+window.supabaseReady = false;
+
+/* ========================================
+   2. DÉFINIR TOUTES LES FONCTIONS
+   ======================================== */
+
+window.selectSingle = function(value) {
+  window.fd.asset = value;
+  document.querySelectorAll('#asset-options .option-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  const selected = document.querySelector(`#asset-options .option-card[data-value="${value}"]`);
+  if (selected) {
+    selected.classList.add('selected');
+  }
+};
+
+window.toggleMulti = function(value) {
+  const card = document.querySelector(`#juris-options .option-card[data-value="${value}"]`);
+  if (card) {
+    card.classList.toggle('selected');
+    window.fd.jurisdictions = [...document.querySelectorAll('#juris-options .option-card.selected')].map(c => c.dataset.value);
+  }
+};
+
+window.selectStatus = function(value) {
+  window.fd.status = value;
+  document.querySelectorAll('#status-options .option-card').forEach(card => {
+    card.classList.remove('selected');
+  });
+  const selected = document.querySelector(`#status-options .option-card[data-value="${value}"]`);
+  if (selected) {
+    selected.classList.add('selected');
+  }
+};
+
+window.nextStep = function(from) {
+  if (from === 2) {
+    window.fd.jurisdictions = [...document.querySelectorAll('#juris-options .option-card.selected')].map(c => c.dataset.value);
+  }
+  if (from < 4) window.showStep(from + 1);
+};
+
+window.prevStep = function(from) {
+  if (from > 1) window.showStep(from - 1);
+};
+
+window.showStep = function(n) {
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(`step-${n}`);
+  if (el) el.classList.add('active');
+  window.setProgress(n);
+};
+
+window.setProgress = function(active) {
+  for (let i = 1; i <= 4; i++) {
+    const ps = document.getElementById(`ps-${i}`);
+    const pl = document.getElementById(`pl-${i}`);
+    if (i < active) {
+      ps.className = 'progress-step done';
+      if (pl) pl.className = 'progress-line done';
+    } else if (i === active) {
+      ps.className = 'progress-step active';
+      if (pl) pl.className = 'progress-line';
+    } else {
+      ps.className = 'progress-step';
+      if (pl) pl.className = 'progress-line';
+    }
+  }
+};
+
+window.buildInsight = function() {
+  const assetMap = {
+    realestate: 'real estate tokenization',
+    fund: 'tokenized fund',
+    stablecoin: 'stablecoin issuance',
+    other: 'RWA tokenization'
+  };
+  const jurisMap = {
+    eu: 'EU (MiCA + MiFID II)',
+    uae: 'UAE (ADGM)',
+    sg: 'Singapore (MAS)',
+    us: 'US (SEC / GENIUS Act)',
+    uk: 'UK (FCA)',
+    ch: 'Switzerland (FINMA)'
+  };
+  const statusMap = {
+    idea: 'at ideation stage',
+    entity: 'with a legal entity in place',
+    term: 'actively fundraising',
+    platform: 'as a platform serving multiple issuers'
+  };
+
+  const asset = assetMap[window.fd.asset] || 'your project';
+  const juris = window.fd.jurisdictions.map(j => jurisMap[j]).filter(Boolean);
+  const status = statusMap[window.fd.status] || '';
+  const jurisText = juris.length ? juris.slice(0, 3).join(', ') : 'your target markets';
+
+  if (!window.fd.asset) {
+    return `Project 2 will generate a complete structuring report covering legal entity, token classification, licenses, and documentation for your specific asset and markets. We'll reach out with a tailored preview.`;
+  }
+  return `For <strong>${asset}</strong> ${status}, the engine will analyse your compliance requirements across <strong>${jurisText}</strong>, covering token classification, the right legal entity structure, required licenses, and a documentation checklist. No lawyer needed to get started.`;
+};
+
+window.submitForm = async function() {
+  window.fd.email = document.getElementById('email-input').value.trim();
+  window.fd.name = document.getElementById('name-input').value.trim();
+  const emailEl = document.getElementById('email-input');
+
+  if (!window.fd.email || !window.fd.email.includes('@')) {
+    emailEl.classList.add('error');
+    emailEl.focus();
+    return;
+  }
+  emailEl.classList.remove('error');
+
+  // Vérifier le client Supabase
+  if (!window.supabaseClient) {
+    alert('System not ready. Please reload the page.');
+    return;
+  }
+
+  try {
+    const { error } = await window.supabaseClient.from('waitlist').insert([{
+      name: window.fd.name,
+      email: window.fd.email,
+      asset: window.fd.asset,
+      jurisdictions: window.fd.jurisdictions,
+      status: window.fd.status,
+      created_at: new Date().toISOString()
+    }]);
+    if (error) throw error;
+  } catch (e) {
+    console.error('Error saving to Supabase:', e);
+    alert('Error saving. Please try again.');
+    return;
+  }
+
+  // Show thank you screen
+  document.getElementById('progress-bar').style.display = 'none';
+  document.querySelectorAll('.form-step').forEach(s => s.style.display = 'none');
+  const ty = document.getElementById('form-thankyou');
+  ty.style.display = 'block';
+  const n = window.fd.name ? window.fd.name.split(' ')[0] : null;
+  document.getElementById('ty-sub-text').textContent = n
+    ? `We'll send your structuring preview to ${window.fd.email} within 24 hours, ${n}.`
+    : `We'll send your structuring preview to ${window.fd.email} within 24 hours.`;
+  document.getElementById('ty-insight-text').innerHTML = window.buildInsight();
+};
+
+/* ========================================
+   3. INITIALISER SUPABASE
+   ======================================== */
+function initSupa() {
+  if (window.supabaseReady) return;
+
+  if (window.supabase && typeof window.supabase.createClient === 'function') {
+    try {
+      const { createClient } = window.supabase;
+      window.supabaseClient = createClient(
+        'https://cgauhzzmrfsjpatxceuu.supabase.co',
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNnYXVoenptcmZzanBhdHhjZXV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2MTA3NDgsImV4cCI6MjA4OTE4Njc0OH0.0nARYKKLdLiD9CnO3UE2tZhEUZArRdaMkboI9tyZwnI'
+      );
+      window.supabaseReady = true;
+      console.log('Supabase initialized successfully');
+    } catch (e) {
+      console.error('Supabase init failed:', e);
+    }
+  }
+}
+
+// Try immediately and retry multiple times
+initSupa();
+window.setTimeout(initSupa, 100);
+window.setTimeout(initSupa, 300);
+window.addEventListener('load', initSupa);
+
+/* ========================================
+   4. EVENT DELEGATION POUR LES CLICS
+   ======================================== */
+document.addEventListener('click', function(e) {
+  const card = e.target.closest('.option-card');
+  if (!card) return;
+
+  const isAssetCard = card.closest('#asset-options');
+  const isJurisCard = card.closest('#juris-options');
+  const isStatusCard = card.closest('#status-options');
+
+  if (isAssetCard) {
+    window.selectSingle(card.dataset.value);
+  } else if (isJurisCard) {
+    window.toggleMulti(card.dataset.value);
+  } else if (isStatusCard) {
+    window.selectStatus(card.dataset.value);
+  }
+}, true);
+
+/* ========================================
+   5. SCROLL REVEALS
+   ======================================== */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: .1 });
+
+document.querySelectorAll('.reveal, .pain-item, .pipeline-step').forEach(el => obs.observe(el));
+document.querySelectorAll('.pain-item').forEach((el, i) => el.style.transitionDelay = `${i * 90}ms`);
+document.querySelectorAll('.pipeline-step').forEach((el, i) => el.style.transitionDelay = `${i * 65}ms`);
+</script>
+
+</body>
+</html>

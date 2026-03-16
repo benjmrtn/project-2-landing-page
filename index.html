@@ -746,7 +746,7 @@ window.submitForm = async function() {
   }
 
   try {
-    const { error } = await window.supabaseClient.from('waitlist').insert([{
+    const { error } = await window.supabaseClient.from('early_access_signups').insert([{
       name: window.fd.name,
       email: window.fd.email,
       asset: window.fd.asset,
